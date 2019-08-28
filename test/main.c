@@ -1,5 +1,7 @@
 #include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "my_puts.h"
 #include "my_put_number.h"
@@ -9,9 +11,7 @@
 #include "my_read_line.h"
 #include "term_tools.h"
 #include "my_qsort.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include "my_heap.h"
 
 
 int *getRandomArray(int size, int min, int max)
@@ -47,6 +47,31 @@ void bubble_sort(int *array, int length)
     }
 }
 
+void test_heapsort(int testCount, int testSize)
+{
+    int **test_table;
+    int i;
+    clock_t start, end;
+
+    my_printf("Allocating %d MB of memory\n", (testCount * testSize * sizeof(int)) / (1024 * 1024));
+    test_table = (int**)malloc(sizeof(*test_table) * testCount);
+    for (i = 0; i < testCount; ++i)
+    {
+        test_table[i] = getRandomArray(testSize, -1000000, 1000000);
+    }
+
+    my_printf("Starting test now\n");
+    start = clock();
+
+    for (i = 0; i < testCount; ++i)
+    {
+        heap_sort(test_table[i], testSize);
+    }
+
+    end = clock();
+
+    printf("Test took %f seconds for %d runs of heap sort on %d sized arrays.\n", (double)(end - start) / CLOCKS_PER_SEC, testCount, testSize);
+}
 
 void test_quicksort(int testCount, int testSize)
 {
@@ -121,13 +146,32 @@ int main()
     char *input;
     int* array;
     int arraySize = 1000;
+    t_my_heap* heap;
 
     struct termios terminal;
 
     srandom(time(0));
+/*
+    heap = init_heap(10);
+    insert_item(heap, 42);
+    insert_item(heap, 2);
+    insert_item(heap, 52);
+    insert_item(heap, 3);
+    insert_item(heap, 12);
+    insert_item(heap, 30);
+    insert_item(heap, 1);
 
-    test_quicksort(1, 40000);
-    test_bubblesort(1, 40000);
+    print_heap(heap);
+
+    my_printf("sort result:\n");
+    while (heap->end >= 0)
+    {
+        my_printf("%d,\n ", pop_minimum(heap));
+        print_heap(heap);
+    }
+*/
+    test_quicksort(20, 4000000);
+    test_heapsort(20, 4000000);
 
     /*array = getRandomArray(arraySize, -100, 100);
     printf("Before sort:\n");
