@@ -1,5 +1,5 @@
 #ifndef TERM_TOOLS_H_
-# define TERM_TOOL_H_
+# define TERM_TOOLS_H_
 
 # include <stddef.h>
 # include <termios.h>
@@ -27,5 +27,5 @@ int restore_terminal();
 
 int set_terminal(struct termios *term);
 
-#endif /* TERM_TOOLD_H_ */
+#endif /* TERM_TOOLS_H_ */
 

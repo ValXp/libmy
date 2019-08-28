@@ -48,7 +48,7 @@ void bubble_sort(int *array, int length)
 }
 
 
-int test_quicksort(int testCount, int testSize)
+void test_quicksort(int testCount, int testSize)
 {
     int **test_table;
     int i;
@@ -74,7 +74,7 @@ int test_quicksort(int testCount, int testSize)
     printf("Test took %f seconds for %d runs of quick sort on %d sized arrays.\n", (double)(end - start) / CLOCKS_PER_SEC, testCount, testSize);
 }
 
-int test_bubblesort(int testCount, int testSize)
+void test_bubblesort(int testCount, int testSize)
 {
     int **test_table;
     int i;
@@ -114,7 +114,7 @@ void printArray(int *array, int size)
 }
 
 
-int main(int ac, char **av)
+int main()
 {
     int i;
     int res;

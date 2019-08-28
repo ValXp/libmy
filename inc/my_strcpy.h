@@ -1,5 +1,5 @@
 #ifndef MY_STRCPY_H_
-# define MY_STR_CPY_H_
+# define MY_STRCPY_H_
 
 
 void my_strcpy(char *dest, const char *source);
