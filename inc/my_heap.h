@@ -10,6 +10,7 @@ typedef struct  s_my_heap
 
 
 t_my_heap* init_heap(int size);
+void delete_heap(t_my_heap* heap);
 void insert_item(t_my_heap* heap, int item);
 int pop_minimum(t_my_heap* heap);
 int check_valid(t_my_heap* heap);

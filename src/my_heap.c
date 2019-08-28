@@ -14,6 +14,17 @@ t_my_heap* init_heap(int size)
     return heap;
 }
 
+
+void delete_heap(t_my_heap* heap)
+{
+    if (heap == NULL)
+    {
+        return;
+    }
+    free(heap->array);
+    free(heap);
+}
+
 void bubble_down(t_my_heap* heap, int position)
 {
     int child;
@@ -135,6 +146,6 @@ void heap_sort(int *array, int length)
     {
         array[i] = pop_minimum(heap);
     }
-
+    delete_heap(heap);
 }
 

@@ -71,6 +71,12 @@ void test_heapsort(int testCount, int testSize)
     end = clock();
 
     printf("Test took %f seconds for %d runs of heap sort on %d sized arrays.\n", (double)(end - start) / CLOCKS_PER_SEC, testCount, testSize);
+
+    for (i = 0; i < testCount; ++i)
+    {
+        free(test_table[i]);
+    }
+    free(test_table);
 }
 
 void test_quicksort(int testCount, int testSize)
@@ -97,6 +103,12 @@ void test_quicksort(int testCount, int testSize)
     end = clock();
 
     printf("Test took %f seconds for %d runs of quick sort on %d sized arrays.\n", (double)(end - start) / CLOCKS_PER_SEC, testCount, testSize);
+
+    for (i = 0; i < testCount; ++i)
+    {
+        free(test_table[i]);
+    }
+    free(test_table);
 }
 
 void test_bubblesort(int testCount, int testSize)
@@ -124,6 +136,12 @@ void test_bubblesort(int testCount, int testSize)
 
 /* TODO: Add %f to my_printf */
     printf("Test took %f seconds for %d runs of bubble sort on %d sized arrays.\n", (double)(end - start) / CLOCKS_PER_SEC, testCount, testSize);
+
+    for (i = 0; i < testCount; ++i)
+    {
+        free(test_table[i]);
+    }
+    free(test_table);
 }
 
 void printArray(int *array, int size)
@@ -169,9 +187,10 @@ int main()
         my_printf("%d,\n ", pop_minimum(heap));
         print_heap(heap);
     }
+    delete_heap(heap);
 */
-    test_quicksort(20, 4000000);
-    test_heapsort(20, 4000000);
+    test_quicksort(20, 4000);
+    test_heapsort(20, 4000);
 
     /*array = getRandomArray(arraySize, -100, 100);
     printf("Before sort:\n");
