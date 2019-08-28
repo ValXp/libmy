@@ -1,5 +1,6 @@
 #!/bin/sh
 
+mkdir -p obj
 pushd obj >> /dev/null
 rm -f *
 echo "Compiling " ../src/*.c
