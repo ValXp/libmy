@@ -1,3 +1,5 @@
+#include "my_swap.h"
+#include "my_const.h"
 
 void quick_sort(int *array, int length)
 {

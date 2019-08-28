@@ -8,45 +8,11 @@
 #include "my_strcmp.h"
 #include "my_read_line.h"
 #include "term_tools.h"
+#include "my_qsort.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-void swap(int *left, int *right)
-{
-    int tmp = *right;
-    *right = *left;
-    *left = tmp;
-}
-
-
-void quick_sort(int *array, int length)
-{
-    int *pivot = array + length - 1;
-    int *cursor = array;
-    int *highest = array;
-    int size;
-    int i;
-    if (array == NULL || length <= 1)
-    {
-        return;
-    }
-    while (cursor < array + length - 1)
-    {
-        if (*pivot >= *cursor)
-        {
-            swap(highest, cursor);
-            highest++;
-        }
-        ++cursor;
-    }
-    swap(highest, pivot);
-
-    
-    size = highest - array;
-    quick_sort(array, size);
-    quick_sort(highest + 1, length - size - 1);
-}
 
 int *getRandomArray(int size, int min, int max)
 {
@@ -74,7 +40,7 @@ void bubble_sort(int *array, int length)
         {
             if (array[i] > array[i + 1])
             {
-                swap(array + i, array + i + 1);
+                my_swap(array + i, array + i + 1);
                 swapped = 1;
             }
         }
@@ -88,14 +54,14 @@ int test_quicksort(int testCount, int testSize)
     int i;
     clock_t start, end;
 
-    printf("Allocating %d MB of memory\n", (testCount * testSize * sizeof(int)) / (1024 * 1024));
+    my_printf("Allocating %d MB of memory\n", (testCount * testSize * sizeof(int)) / (1024 * 1024));
     test_table = (int**)malloc(sizeof(*test_table) * testCount);
     for (i = 0; i < testCount; ++i)
     {
         test_table[i] = getRandomArray(testSize, -1000000, 1000000);
     }
 
-    printf("Starting test now\n");
+    my_printf("Starting test now\n");
     start = clock();
 
     for (i = 0; i < testCount; ++i)
@@ -114,14 +80,14 @@ int test_bubblesort(int testCount, int testSize)
     int i;
     clock_t start, end;
 
-    printf("Allocating %d MB of memory\n", (testCount * testSize * sizeof(int)) / (1024 * 1024));
+    my_printf("Allocating %d MB of memory\n", (testCount * testSize * sizeof(int)) / (1024 * 1024));
     test_table = (int**)malloc(sizeof(*test_table) * testCount);
     for (i = 0; i < testCount; ++i)
     {
         test_table[i] = getRandomArray(testSize, -1000000, 1000000);
     }
 
-    printf("Starting test now\n");
+    my_printf("Starting test now\n");
     start = clock();
 
     for (i = 0; i < testCount; ++i)
@@ -131,6 +97,7 @@ int test_bubblesort(int testCount, int testSize)
 
     end = clock();
 
+/* TODO: Add %f to my_printf */
     printf("Test took %f seconds for %d runs of bubble sort on %d sized arrays.\n", (double)(end - start) / CLOCKS_PER_SEC, testCount, testSize);
 }
 
@@ -138,12 +105,12 @@ void printArray(int *array, int size)
 {
     int i;
 
-    printf("{");
+    my_printf("{");
     for (i = 0; i < size - 1; ++i)
     {
-        printf("%d, ", array[i]);
+        my_printf("%d, ", array[i]);
     }
-    printf("%d}\n", array[size - 1]);
+    my_printf("%d}\n", array[size - 1]);
 }
 
 
@@ -159,8 +126,8 @@ int main(int ac, char **av)
 
     srandom(time(0));
 
-    test_quicksort(1, 400000);
-    test_bubblesort(1, 400000);
+    test_quicksort(1, 40000);
+    test_bubblesort(1, 40000);
 
     /*array = getRandomArray(arraySize, -100, 100);
     printf("Before sort:\n");

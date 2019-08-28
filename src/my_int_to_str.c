@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "my_pow.h"
+#include "my_const.h"
 
 int my_int_to_str_count_digits(int number)
 {
