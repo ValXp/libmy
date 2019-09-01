@@ -6,8 +6,6 @@ void quick_sort(int *array, int length)
     int *pivot = array + length - 1;
     int *cursor = array;
     int *highest = array;
-    int size;
-    int i;
 
     if (array == NULL || length <= 1)
     {
@@ -24,7 +22,6 @@ void quick_sort(int *array, int length)
         ++cursor;
     }
     my_swap(highest, pivot);
-
     
     size = highest - array;
     quick_sort(array, size);
