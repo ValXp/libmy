@@ -6,6 +6,7 @@ void quick_sort(int *array, int length)
     int *pivot = array + length - 1;
     int *cursor = array;
     int *highest = array;
+    int size;
 
     if (array == NULL || length <= 1)
     {
